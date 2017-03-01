@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.25)  23 FEB 2017 18:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.25)  1 MAR 2017 23:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -119,24 +119,46 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@line=\toks21
 \verbatim@in@stream=\read1
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen114
+\captionmargin@=\dimen115
+\captionwidth=\dimen116
+\caption@tempdima=\dimen117
+\caption@indent=\dimen118
+\caption@parindent=\dimen119
+\caption@hangindent=\dimen120
+)
+\c@ContinuedFloat=\count100
+)
+\c@subfigure=\count101
+\c@subtable=\count102
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count100
+\lst@mode=\count103
 \lst@gtempboxa=\box28
 \lst@token=\toks22
-\lst@length=\count101
-\lst@currlwidth=\dimen114
-\lst@column=\count102
-\lst@pos=\count103
-\lst@lostspace=\dimen115
-\lst@width=\dimen116
-\lst@newlines=\count104
-\lst@lineno=\count105
-\lst@maxwidth=\dimen117
+\lst@length=\count104
+\lst@currlwidth=\dimen121
+\lst@column=\count105
+\lst@pos=\count106
+\lst@lostspace=\dimen122
+\lst@width=\dimen123
+\lst@newlines=\count107
+\lst@lineno=\count108
+\lst@maxwidth=\dimen124
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count106
-\lst@skipnumbers=\count107
+\c@lstnumber=\count109
+\lst@skipnumbers=\count110
 \lst@framebox=\box29
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
@@ -158,31 +180,31 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 (./PLUTO_process_writeup.aux)
 \openout1 = `PLUTO_process_writeup.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count108
-\scratchdimen=\dimen118
+\scratchcounter=\count111
+\scratchdimen=\dimen125
 \scratchbox=\box30
-\nofMPsegments=\count109
-\nofMParguments=\count110
+\nofMPsegments=\count112
+\nofMParguments=\count113
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count111
-\MPscratchDim=\dimen119
-\MPnumerator=\count112
-\makeMPintoPDFobject=\count113
+\MPscratchCnt=\count114
+\MPscratchDim=\dimen126
+\MPnumerator=\count115
+\makeMPintoPDFobject=\count116
 \everyMPtoPDFconversion=\toks24
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -232,145 +254,174 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count114
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count117
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--40
+Underfull \hbox (badness 10000) in paragraph at lines 38--41
 
  []
 
 
-Overfull \hbox (10.82104pt too wide) in paragraph at lines 42--45
-\OT1/cmr/m/n/12 PLUTO is a user-friendly finite-volume (finite-area in 2D case)
-, shock-capturing
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 42--45
+Underfull \hbox (badness 10000) in paragraph at lines 43--46
 
  []
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 52--55
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 87.
 
- []
-
-
-Overfull \hbox (14.48795pt too wide) in paragraph at lines 62--66
-[]\OT1/cmr/m/n/12 DIMENSIONS 2 COM-PO-NENTS 2 GE-OM-E-TRY SPHER-I-CAL (eg, (x1,
-x2)
- []
-
-[2]
-Overfull \hbox (15.66963pt too wide) in paragraph at lines 75--78
- \OT1/cmr/bx/n/12 Defin-ing pa-ram-e-ters[] \OT1/cmr/m/n/12 Key-words: NTRACER,
- USER[]DEF[]PARAMETERS,
- []
-
-Missing character: There is no ‚ in font cmr12!
-Missing character: There is no Ä in font cmr12!
-Missing character: There is no ú in font cmr12!
-Missing character: There is no ‚ in font cmr12!
-Missing character: There is no Ä in font cmr12!
-Missing character: There is no ù in font cmr12!
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--106
-
- []
-
-[3]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 107.
-
- (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 107.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
+ [2] [3]
+Overfull \hbox (1.96956pt too wide) in paragraph at lines 139--140
+[]\OT1/cmr/m/n/12 For more on Go-dunov's method, see **get a ref-er-ence, maybe
+ wikipedias
+ []
 
-<gridspaces.png, id=16, 307.1475pt x 159.59625pt>
+[4] <flat_recon.png, id=24, 349.305pt x 269.005pt>
+File: flat_recon.png Graphic file (type png)
+ <use flat_recon.png>
+Package pdftex.def Info: flat_recon.png used on input line 155.
+(pdftex.def)             Requested size: 175.49881pt x 135.1548pt.
+
+<linear_recon.png, id=26, 347.2975pt x 251.94125pt>
+File: linear_recon.png Graphic file (type png)
+ <use linear_recon.png>
+Package pdftex.def Info: linear_recon.png used on input line 159.
+(pdftex.def)             Requested size: 175.49881pt x 127.31581pt.
+
+<parabolic_recon.png, id=27, 354.32375pt x 255.95625pt>
+File: parabolic_recon.png Graphic file (type png)
+
+<use parabolic_recon.png>
+Package pdftex.def Info: parabolic_recon.png used on input line 163.
+(pdftex.def)             Requested size: 175.49881pt x 126.7788pt.
+ [5 <./flat_recon.png> <./linear_recon.png> <./parabolic_recon.png>] [6] [7] <g
+ridspaces.png, id=42, 307.1475pt x 159.59625pt>
 File: gridspaces.png Graphic file (type png)
- <use gridspaces.png>
-Package pdftex.def Info: gridspaces.png used on input line 120.
+
+<use gridspaces.png>
+Package pdftex.def Info: gridspaces.png used on input line 217.
 (pdftex.def)             Requested size: 227.62204pt x 118.27469pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--133
+Underfull \hbox (badness 10000) in paragraph at lines 231--233
 
  []
 
-[4 <./gridspaces.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 160--164
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 165--169
+[8 <./gridspaces.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 244--247
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--181
+Overfull \hbox (26.92986pt too wide) in paragraph at lines 252--253
+[]\OT1/cmr/m/n/12 User de-fined pa-ram-e-ters are as-signed to vari-ables by va
+r = g[]inputParam[PAR],
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 256--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--181
+Underfull \hbox (badness 10000) in paragraph at lines 256--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--181
+Overfull \hbox (3.23097pt too wide) in paragraph at lines 261--262
+\OT1/cmr/m/n/12 on if, in the pluto.ini file, a bound-ary value is set to USER[
+]DEF[]BOUNDARY. 
+ []
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+) [9]
+Underfull \hbox (badness 10000) in paragraph at lines 274--277
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--187
+Underfull \hbox (badness 10000) in paragraph at lines 274--277
 
  []
 
-[6]
-Overfull \hbox (14.56953pt too wide) in paragraph at lines 210--211
+
+Underfull \hbox (badness 10000) in paragraph at lines 283--286
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 318--321
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 318--321
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 325--328
+
+ []
+
+
+Overfull \hbox (14.56953pt too wide) in paragraph at lines 333--334
 \OT1/cmr/m/n/12 pyPLUTO is a pluto mod-ule de-vel-oped by Bhar-gav Vaidya and D
 e-nis Stepanovs,
  []
 
-[7] <examplesim.png, id=38, 374.39874pt x 272.01625pt>
-File: examplesim.png Graphic file (type png)
- <use examplesim.png>
-Package pdftex.def Info: examplesim.png used on input line 254.
-(pdftex.def)             Requested size: 426.79134pt x 310.09758pt.
-
-Overfull \hbox (36.79134pt too wide) in paragraph at lines 254--256
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[8] [9 <./examplesim.png>] (./PLUTO_process_writeup.aux) ) 
+[12] [13] [14] [15] (./PLUTO_process_writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 3592 strings out of 493089
- 50148 string characters out of 6134842
- 156448 words of memory out of 5000000
- 7040 multiletter control sequences out of 15000+600000
+ 4848 strings out of 493089
+ 72191 string characters out of 6134842
+ 183950 words of memory out of 5000000
+ 8279 multiletter control sequences out of 15000+600000
  10748 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,7n,40p,635b,1642s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2015/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on PLUTO_process_writeup.pdf (9 pages, 155549 bytes).
+ 42i,8n,60p,705b,1663s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2015/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmtt10.pfb>
+Output written on PLUTO_process_writeup.pdf (15 pages, 200936 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+ 114 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
