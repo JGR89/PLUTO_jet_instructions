@@ -1,0 +1,12 @@
+USER           = Jonathan
+WORKING_DIR    = /Users/Jonathan/Desktop/Projects/PLUTO_process_writeup/SECTION2_NOTEBOOK
+SYSTEM_NAME    = Darwin
+NODE_NAME      = Jonathans-MacBook-Pro.local
+RELEASE        = 15.6.0
+ARCH           = x86_64
+BYTE_ORDER     = little
+VERSION        = Darwin Kernel Version 15.6.0: Thu Jun 23 18:25:34 PDT 2016; root:xnu-3248.60.10~1/RELEASE_X86_64
+PLUTO_DIR      = /Users/Jonathan/Documents/PLUTO
+PLUTO_VERSION  = "4.2"
+C_COMPILER     = gcc
+MPI_C_COMPILER = mpicc

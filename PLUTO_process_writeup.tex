@@ -1,19 +1,31 @@
 \title{PLUTO simulation and imaging procedures}
 \author{Jonathan Rogers}
 \date{\today}
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{report}
 
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{verbatim}
 \usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{gensymb}
 
 \usepackage{listings}
 \usepackage{color}
-
+\usepackage[margin=1in]{geometry}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}
+{\Large\bfseries} % format
+{}                % label
+{0pt}             % sep
+{\huge}           % before-code
+
 
 \lstset{frame=tb,
 	language=Python,
@@ -35,20 +47,32 @@
 \begin{document}
 \maketitle
 
-\noindent This document outlines the general processes required to simulate a 2D astrophysical jet using PLUTO. It also provides general instructions on imaging this simulation using python. \\
+\chapter{} This document outlines the general processes required to simulate a 2D astrophysical jet using PLUTO. It also provides general instructions on imaging this simulation using python. \\
 \newline
 Note that it is assumed that the user has python 2.7 installed. Python 3 is not compatible pyPLUTO, a python module that comes with PLUTO.
 \section{PLUTO}
 
 PLUTO is a user-friendly finite-volume/area, shock-capturing code that was written (in C) to integrate a set of conservation laws such as the hydrodynamical equations. There are four inbuilt physics modules allowing for hydrodynamical, magnetohydrodynamical, special relativistic hydrodynamical, and relativistic magnetohydrodynamical physics to be investigated.\\
 \\
-After the initial installation (which is beyond the scope of this document), the code requires 4 files to run: init.c, definitions.h, pluto.ini and an appropriate makefile for your OS. The following sections summarise the role of these files, and give a brief how-to on setting up your own simulation with an emphasis on producing astrophysical jets. The latter sections discuss imaging your simulation using python. A more in-depth guide to PLTUO can be found in the userguide at http://plutocode.ph.unito.it/files/userguide.pdf.
+After the initial installation (which is beyond the scope of this document), the code requires 4 files to run: init.c, definitions.h, pluto.ini and an appropriate makefile for your OS. The following sections summarise the role of these files, and give a brief how-to on setting up your own simulation with an emphasis on producing astrophysical jets. The latter sections discuss imaging your simulation using python. A more in-depth guide to PLTUO can be found in the userguide at http://plutocode.ph.unito.it/files/userguide.pdf. Python 4.2 is used for all examples.
 
-Euler equations:\\
-conservation of mass:
-conservation of momentum
-conservation of energy
-In conservative form:
+\subsection{Euler equations}
+The Euler equations are a set of hyperbolic partial differential equations that govern adiabatic fluid flow. These equations represent the conservation of mass, momentum and energy in a system, are are defined as such:
+\begin{itemize}
+\item Conservation of mass:
+\begin{equation}
+\frac{\partial}{\partial t}\rho + \nabla\cdot(\rho\vec{u}) = 0
+\end{equation}
+\item Conservation of momentum:
+\begin{equation}
+\frac{\partial}{\partial t}+\nabla\cdot (\rho\vec{u}\vec{u}) = \rho\nabla\Phi - \nabla P
+\end{equation}
+\item Conservation of energy:
+\begin{equation}
+\frac{\partial}{\partial t} + \nabla\cdot (e_i\vec{u}) = -P\nabla\cdot\vec{u}
+\end{equation}
+\end{itemize}
+This set of equations can be written in vectorized form:
 \begin{equation}
 \frac{\partial}{\partial t} \begin{pmatrix}
 \rho \\
@@ -75,12 +99,12 @@ E \\
  \end{pmatrix}
 \end{equation}
 m is the momentum density (rho $\vec{u}\vec{u}$).
-Which is of the form
+e is the specific internal energy (i.e., the interal energy per unit of mass.)
 \begin{equation}
 \frac{\partial}{\partial t}\vec{U} = -\nabla \cdot T(\vec{U}) - S(\vec{U})
 \end{equation}
-is this a rieman problem?
-\subsection{Simulation set up}
+This vectorised form is a Rieman problem.
+\section{Simulation set up files}
 
 The three important files that govern the behaviour of your simulation are the definitions.h, pluto.ini and init.c files. These files define things such as:
 \begin{itemize}
@@ -93,7 +117,7 @@ The three important files that govern the behaviour of your simulation are the d
 \end{itemize}
  The files are not independent of each other - that is, there are options that are 'switched on' in one file, but given a value in another. The details of important parameters in these files are discussed below. Note that not all parameters and flags are discussed, only those needed to set up a simple HD, 2D jet simulation.
 
-\subsubsection{definitions.h}
+\subsection{definitions.h}
 The definitions.h file specifies:
 \begin{itemize}
 	\item which fluid equations will be solved
@@ -108,8 +132,7 @@ any other physics dependent parameters (most of which won't be discussed) such a
  
 The definitions.h file can be configured by running the setup.py script (located in the PLUTO/ folder by default). However, there are some parameters (namely those which are physics dependent) that must be edited manually.
 
-\paragraph{Physics and geometry}\mbox{}
-\newline
+\subsubsection{Physics and geometry}
 Most parameters at the beginning of the definitions.h file are somewhat self-explanatory. 
 \begin{itemize}
 \item DIMENSIONS  determines the number of dimensions in your simulation. For 2D simulations, trivially the DIMENSIONS parameters takes the integer value 2. 
@@ -128,7 +151,7 @@ The importance of selecting the most appropriate geometry is discussed further i
 \item BODY\_FORCE is a switch that enables for a body force term to be included in the momentum and energy equations. It can be input as a scalar potential, or expressed as a vector. This will be discussed further in 'the init.c section'. This is an important flag as it invokes self-gravity of the gas in the simulation which can drastically change the resulting morphology.
 \end{itemize}
 
-\paragraph{Solvers}
+\subsubsection{Solvers}
 The solvers block 
 
 \begin{itemize}
@@ -221,30 +244,21 @@ This is useful if finer resolution is only needed on smaller scales. The computa
 
 \paragraph{Time and Solver blocks}\mbox{}
 \newline
-- Includes comes values that relate to the time stepper selected in the definitions.h file. See the userguide for more info.
+These blocks includes parameters that relate to the time stepper selected in the definitions.h file. See the userguide for more info. The two parameters we shall briefly explain are tstop and first\_dt. The parameter tstop is the integration stop time (in simulation units). The conversion between code units and physical units of time enable for the customisation of jet age. The length of the initial integration step is set by the parameter first\_dt. Values that are too extreme may cause stability issues at the very beginning on the integration. As per the useguide, a typical value is 10$^{-6}$.
 
-- tstop is the integration stop time (i.e. simulation temporal length)
+Solvers are not explained here, but see Table 4.1 of the userguide to check what the most appropriate solver for your chosen physics module.
 
-- first\_dt sets the initial time step. Values that are too extreme may cause stability issues at the very beginning on the integration. As per the useguide, a typical value is 10$^{-6}$
-
-see table 4.1 for appropriate solvers for your chosen physics module.
 \paragraph{Boundary}\mbox{}
 \newline
-
-need to figure out a way to not just copy the userguide for this bit 
-
-- mention that a reflective boundary mimics the existence of a counter jet, thus giving a more accurate simulation.
+The boundary block enables you to set the state of the boundary on each side of the simulation. A selection of 'userdef', usually on the X1\_BEG parameter, enables for a custom boundary condition to be set in the init.c file. This is how astrophysical jets are introduced onto the grid. Setting the remainder of the injection boundary to reflective mimics the presence of a counter jet, which produces a more realistic simulation. An example of implementing a user defined boundary condition in given in section 2.
 
 \paragraph{Static grid output}\mbox{}
 \newline
-- Controls the output frequency and the format. 
-- Only going to worry about the dbl line.
-- dbl, print step, whats -1?, single\_file or multiple\_files, depending on if you want all of your variables printed to the one file?
+This section allows for the customisation of output file type, as well as the frequency at which your simulation is written to file. We are going to only use the dbl format, which is a binary file format. Setting all the other parameters to -1.0 switches them off from being written to file. Setting the dbl parameter to 1 would correspond to a file being written every 1 simulation unit. The user may also choose if every state variable value is written to it's own file, or if a every variable is written to a single file. 
 
 \paragraph{Parameters}\mbox{}
-The parameters section is where values are given to the user defined parameters. Values of these parameters are used in the init.c file.
 \newline
-
+The parameters section is where values are given to the user defined parameters. Values of these parameters are used in the init.c file.
 
 \subsubsection{init.c}
 The initial conditions and boundary conditions of the problem are set in the init.c file. Here we briefly discuss the functions involved. The manipulation of the lower (x,y) boundary (or lower (r) boundary on a spherical grid) to include an inflow of conserved simulation quantities is used to simulate a fluid jet. Quantities involved may also be user defined parameters (values set in the pluto.ini file)
@@ -259,9 +273,11 @@ The init "section"? (not sure what to call it) defines the initial condition of 
 This "section"? may involve defining variables such as $c_s$, and the adiabatic index, $\gamma$. An example of this section is used in Section 2.\\
 
 \paragraph{UserDefBoundary section}
-The UserDefBoundary function is switched on if, in the pluto.ini file, a boundary value is set to USER\_DEF\_BOUNDARY.
+The UserDefBoundary function is switched on if, in the pluto.ini file, a boundary value is set to userdef. Selecting a boundary is used via the variable 'side'. For example, if side has a value of 1, then the X1 boundary is selected. 
 
-It is also useful to define a pressure floor (code shit beds if negative pressures are involved) in boundary conditions. can do this using the function TOP\_LOOP.
+A side value of 0 allows for complete control over the solution arrays during integration (if the definitions.h file has INTERNAL BOUNDARY set to YES). Manipulation of the solution array is a useful way to define, for example a pressure floor. This technique is best used with the TOT\_LOOP function. This functions simply cycles through each cell in the simulation.
+
+Setting a pressure floor of, for example, $10^{-6}$ may be done so in the following manner:
 \begin{lstlisting}[language=C++]
 if (side == 0){
 	TOT_LOOP(k,j,i){
@@ -272,16 +288,9 @@ if (side == 0){
 	}
 }
 \end{lstlisting}
-Top loop loops over every cell in the simulation.\\
-\\
-What does d$->$ Vc actually do? What is side==0? may need to ask ross.\\
-d->Vc[PRS][k][j][i] is the syntax needed to define a state variable value.
+The  'd$\rightarrow$ Vc' simply points to the location in memory that struct Vc exists in. If the array PRS in this struct has any values $< 10^{-6}$, then that valuue is set to $10^{-6}$.
 
-BOX\_LOOP
-"The macro BOX LOOP(box,k,j,i) performs a loop over the bottom boundary zones and, for cellcentered
-data, it is equivalent to the macro X2 BEG LOOP(k,j,i)"
-Loops over the boundary values only.
-An example of using the BOX LOOP function to set a boundary condition is shown in Section 2.
+The user defined boundary values use a similar function, the BOX\_LOOP function. This function loops through cell values the bottom of the boundary zones. When used in conjunction with the side variable, the user may select a boundary cell to change the value of. An example of using the BOX LOOP function to set a boundary condition is shown in Section 2.
 
 \subsection{Nondimensionalization of the simulation}
 Two limitations of numerical simulations are computation time, and numerical integration error. Both of these factors can minimised by writing optimised code that uses less memory.\\
@@ -310,7 +319,7 @@ The outer scale of a jet, or L2 is where the jet pressure is comparable to the e
 \end{equation}
 Note that the environment pressure and density could refer to the ambient medium, or the jet cocoon should one have formed. This can be expressed in terms of $Q_0$, $\rho_x$, and the soundspeed of the medium $c_x$ (Komissarov \& Falle 1998)
 \begin{equation}
-GIVE EQUATION
+L_2 = \left(\frac{Q_0}{\rho_x c_x^3} \right)^{1/2}
 \end{equation}
 \\
 There exist three more length scales between L1 and L2. However, unlike the inner and outer scale, the order of the remaining three scales depend on the physics of the jet and environment, and will determine the morphological features of the jet and the surrounding medium. These three intermediate scales relate to the locations of jet collimation (L1a), cocoon formation (L1b) and jet termination (L1c). The order to these three scales change with jet morphology, and thus jet morphology can be understood via the ratios of the scales. These scales discussed should be taken as order of magnitude estimates rather than exact physical locations in simulations or observations.
@@ -379,43 +388,208 @@ plt.show()
 
 Alternatively, is it better practise to write functions for getting the data and plotting it. An example of this is given in section 2.
 
+\chapter{}
 \section{PLUTO Example (github required)}
 
 The following section works through setting up and imaging a simple 2D HD simulation of an astrophysical jet using the PLUTO code, and jpython 2.7
 
-We begin by obtaining the necessary run files using github.
+We begin by obtaining the necessary run files using github, using git clone \url{https://github.com/JGR89/PLUTO_EXAMPLE_FILES.git} to clone the repository.
+
+An example of an FR-II jet will be produced using a density profile that declines as a function of $r^{2}$. The simulation must therefore be defined in spherical coordinates. This is already consistent with the definitions.h and pluto.ini file, but will be discussed in more depth.
+
+\subsection{Jet parameters}
+The physical parameters that we choose for the jet are those given in Hardcastle \& Krause 2013.  Calculation of these values can be found in the accompanying ipython notebok. These initial values are:
+\begin{itemize}
+	\item Power, Q = 10$^{38}$W
+	\item Density (at r = 0), $\rho_0  = 3\times10^{-23}\frac{kg}{m^3}$
+	\item Cluster temperature $T = 2.3\times10^7 K$	
+	\item Sound speed, $c_s = \sqrt{\frac{\gamma k_b T}{\mu m_H}} = 730\frac{km}{s}$, where $\mu$ is the average atomic weight of the particles, and $m_H$ is the mass of a hydrogen atom. $\mu$ is given a value of 0.6 (why?)
+	\item Mach number of the jet is assumed to be 25
+	\item the opening angle of the jet, $\theta_{jet}$ is assumed to be 15$^{\circ}$
+\end{itemize}
+The cluster density is further assumed to be given by a King Profile:
+\begin{equation}
+\rho = \rho_0\left[ 1 + \left(\frac{r}{r_c}\right)^2 \right]^{\frac{-3\beta}{2}}
+\end{equation}
+(where $\beta = \frac{\mu m_p \sigma^2}{kT}$). This example will choose a value of $\beta$ = 0.35. See HK13 for further information.\\
+\\
+The the body force term is $\nabla \Phi = \frac{-\log{\rho}}{\gamma}$. As this is calculated as a potential rather than in vector form, this requires the BODY\_FORCE switch in the definitions.h file must be set to POTENTIAL. The init.c file must also be coded to return $\frac{-log(\rho)}{\gamma}$ when the BodyForcePotential function is called. More on this in Section 2.2.\\
+\\
+The grid block in the pluto.ini file reflects a quarter quarter of a circle. The $x_2$ = $\theta$ coordinate therefore has a range of [0,$\pi/2$]. We also define 2 Patches in the r coordination, and 2 Patches in the $\theta$ coordinate. 
+
+\subsection{Coding the pluto.ini file}
+\begin{lstlisting}
+[Grid]
+
+X1-grid    2    0.1    120    u    1.5    120    u    ###
+X2-grid    2    0.0    240    u    0.785  120    u    1.571
+\end{lstlisting}
+With X3 being arbitrary in this 2D simulation.\\
+\\
+The time block has t\_stop to be 50, corresponding to 143.5 Myrs (2.87 Myr per time step). The initial dt is set to $10^{-6}$
+\begin{lstlisting}
+[Time]
+
+CFL              0.4
+CFL_max_var      1.1
+tstop            50.0
+first_dt         1.e-6
+
+[Solver]
+
+Solver        hllc
+
+\end{lstlisting}
+
+The boundary block is coded to introduce a jet onto the (r,$\theta$) grid from the lower r boundary cell. This will be implemented in the init.c file by adjusting the UserDefBoundary function.\\
+\\
+X1\_end is set to reflective as this mimics a counterjet (Hardcastle \& Krause 2013).
+To make use of the spherical coordinate system, the X2\_beg cell is set to be axisymmetric (rotated about the X1 axis in a cartesian projection), and the X2\_end cell to be eqtsymmetric, thus rotating the simulation about the X2 axis.
+
+\begin{lstlisting}
+[Boundary]
+
+X1-beg        userdef
+X1-end        reflective
+X2-beg        axisymmetric
+X2-end        eqtsymmetric
+X3-beg        outflow
+X3-end        outflow
+\end{lstlisting}
+The static grid output block will be used to specify that a dbl file (binary file) should be printed every 0.5 timesteps. Every printed variable is also to be located in a single file. The remaining lines in the static grid are to be left as -1 to suppress printing. The log keyword
+\begin{lstlisting}
+[Static Grid Output]
+
+uservar    0
+dbl        0.5  -1   single_file
+flt       -1.0  -1   single_file
+vtk       -1.0  -1   single_file
+tab       -1.0  -1   
+ppm       -1.0  -1   
+png       -1.0  -1
+log        10
+analysis  -1.0  -1
+\end{lstlisting}
+The parameters section defines the four input variables required for the simulation: 
+\begin{itemize}
+\item H\_OPEN\_ANG is the opening angle of the jet in degrees
+\item MACH\_EXT is the Mach number of the jet
+\item R\_CORE in the core radius term for the density profile (King Profile)
+\item B\_EXPONENT changes the steepness, and distance at which the density profile declines
+\end{itemize}
+\begin{lstlisting}
+[Parameters]
+
+H_OPEN_ANG           35.0  
+MACH_EXT             25.0  
+R_CORE               40.0
+B_EXPONENT           0.38  
+\end{lstlisting}
 
 
+\subsection{Coding the init.c file}
+\subsubsection{Init functon}
+\paragraph{UserDefBoundary}
+\begin{lstlisting}[language=C++]
+theta_rad = g_inputParam[H_OPEN_ANG] * CONST_PI / 180.0;
 
-Require the user to download some example files from gitgub
-- probably also talk about how to put your own files on github, giving special care not to prompt the user to upload their entire simulation.
+if (side == X1_BEG){     /* -- select the boundary side -- */
+    BOX_LOOP(box,k,j,i){   /* -- Loop over boundary zones -- */
+        if (theta[j] <= theta_rad){     
+            /* -- set values for r <= theta_rad -- */
+            d->Vc[RHO][k][j][i] = vj[RHO];
+            d->Vc[VX2][k][j][i] = 0.0;
+            d->Vc[VX1][k][j][i] = vj[VX1];
+            d->Vc[PRS][k][j][i] = vj[PRS];
+            }
+        else{  /* -- reflective boundary for r > theta_rad --*/
+            d->Vc[RHO][k][j][i] =  d->Vc[RHO][k][j][2*IBEG - i - 1];
+            d->Vc[VX1][k][j][i] =  d->Vc[VX1][k][j][2*IBEG - i - 1];
+            d->Vc[VX2][k][j][i] = -d->Vc[VX2][k][j][2*IBEG - i - 1];
+            d->Vc[PRS][k][j][i] =  d->Vc[PRS][k][j][2*IBEG - i - 1];
+         }
+    }
+}
+\end{lstlisting}
+The cell in which the jet is implemented in a boundary condition is located using side == X1\_BEG (i.e., the beginning of the r axis). \\
+\\
+The BOX\_LOOP function is then used to loop over the boundary zone of in each cordinate, and change the values of RHO, VX1, and PRS (More information on the BOX\_LOOP function is given in Section 1.2.3.). The boundary cells which are looped over are constrained for all cells with theta coordinates less than some value theta\_rad. This is how the opening angle of the jet is defined. The variable is initialised in the definitions.h fie, and given a via the pluto.ini file. This simulation uses a value of 15$^{\circ}$, consistent with Hardcastle \& Krause 2013.\\
+\\
+The reflective boundary condition for the rest of the boundary is set using the syntax presented in the else statement. 'what does it do?'
 
+\paragraph{BodyForcePotential}
 
+The BodyForcePotential() function allows for the inclusion of a body force term in the hydrodynamics equations, as discussed in section X.\\
+\\
+Assume that a spherical gas cloud is in hydrostatic equilibrium. If the cloud is stable, then gravitational force is unable to overcome the internal pressure, and
+\begin{equation}
+-\frac{G\rho(r)M_{cloud}(r)}{r^2} = \frac{dP}{dr}
+\end{equation}
+Therefore the acceleration that a particle would feel can be expressed as
+\begin{equation}
+-\frac{GM_{cloud}(r)}{r^2} = \frac{1}{\rho(r)}\frac{dP}{dr} = a
+\end{equation}
+The sound speed is given by
+\begin{equation}
+c_s^2 = \frac{\gamma P}{\rho} \implies P = \frac{c_s^2 \rho}{\gamma}
+\end{equation}
+However, in simulation units, we set the sound speed $c_s$ to be 1
+\begin{equation}
+\therefore \rho = \gamma P
+\end{equation}
+Therefore, (15) can be written as
+\begin{equation}
+\frac{1}{\rho(r)}\frac{dP}{dr} = \frac{1}{\rho}\frac{d}{dr}\left( \frac{\rho}{\gamma} \right) = \frac{1}{\gamma}\frac{1}{\rho}\frac{d}{dr}\rho(r)
+\end{equation}
+And from the chain rule
+\begin{displaymath}
+\frac{d}{dr} \ln{\rho(r)} = \frac{1}{\rho}\frac{d}{dr} \rho(r)
+\end{displaymath}
+\begin{displaymath}
+\therefore \frac{1}{\rho(r)}\frac{dP}{dr} = \frac{1}{\gamma}\frac{\partial}{\partial r}\ln{\rho} = \frac{\nabla \ln{\rho}}{\gamma}
+\end{displaymath}
+for a potential in spherical coordinates. We therefore code this potential in each of the spatial coordinates in the BodyForcePotential function in the init.c file.
 
-An example of an FR-II jet will be produced using a density profile that declines as a function of $r^{2}$. The simulation must therefore be defined in spherical coordinates. This is consistent with the definitions.h and pluto.ini file.
+\begin{lstlisting}
+double BodyForcePotential(double x1, double x2, double x3){
 
-The grid block in the pluto.ini file reflects a quarter quarter of a circle. We will set a variable resolution in r, and an even resolution in theta.
+double rho, g_gamma, r, potential;
+g_gamma = 5.0/3.0;
+r = x1;
 
-- Define new parameters (make a diagram)
-- go through the init.c file and code up each section
-- run the code
-- image the code using the code in the section before
-- plot in R,Theta space, then transform to cartesian and replot
-- should look like this: pic goes here
-- congrats, you've got a jet.
+rho = pow(1 + pow(r/g_inputParam[R_CORE],2),-1.5*g_inputParam[B_EXPONENT]);
+potential = -log(rho)/g_gamma;
+return potential
+}
+\end{lstlisting}
 
+\subsection{Running the simulation}
+With the 3 files coded, we first need to change the makefile. \\
+\\
+On a mac, using your preferred method, edit your .bashrc profile with an alias to initiate the setting up of pluto with a command line keyword. In the code below, the keyword 'sp' is assigned to do this.
+\begin{lstlisting}
+alias sp='/usr/local/bin/python2.7 /Users/Jonathan/Documents/PLUTO/setup.py'
+\end{lstlisting}
+On a mac, run setup.py using your alias from your working directory that contain the files obtained from github. This will produce the PLUTO setup page (Figure 3)
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{pluto_menu_pic.png}
+	\caption{The PLUTO menu}
+\end{figure}
+	
+The 'Setup problem' selection may first be run - however, each screen may just be entered through for this example as each value was manually set.\\
+\\
+The appropriate makefile must be selected for your system. For Macs, this may be Drawin.gcc.defs, or Darwin.mpicc.defs. The gcc.defs extension indicates that this c compiler must be available on your system? Similarily, the mpicc.defs extension indicates that mpicc must be avaliable on your system. Mpi allows for parallel computing, and can tus utalize a greater number of processors. This example chooses mpicc.defs, as it allows for the specification of number of cores to use when executing PLUTO.
 
-- the geometry and body force selection must match the coding of your simulation in the init.c file
-- can specify opening angle of jet in terms of theta (mention Krause et al. 2012 and how it is a morpholoy divide between jets)
+Now exit the setup page, and from your working directory execute the following command in terminal to run the code:
+\begin{lstlisting}
+mpirun -np # ./pluto
+\end{lstlisting}
 
--have pretty much written this example - just need to copy my python code.
+As this is a mach 25 jet, the simulation may time some time to run. Should you wish to gain an output immediately, the Mach number can be changed to a lower value. Note however that the Mach number enters the L1 scale through the jet velocity, and thus some scale sof your simulation will change.
+\subsection{PLUTO Imaging example}
+	
+The following imaging example uses the method outlined in Section 0.2.3 (fornow). The accompanying ipython notebook was obtained from the github page when the initialisation files were obtained.
 
-\subsection{}
-TO DO ON MY AUSCOPE SHIFT :D (hopefully..)
-- copy jet example
-- download the init.c, definitions.h and pluto.ini file from github
-- define  H\_OPEN\_ANG
-- define  MACH\_EXT
-
+Note that the simulation can be sped up by lowering the Mach number, and making the grid resolution larger.
 
 \end{document}
